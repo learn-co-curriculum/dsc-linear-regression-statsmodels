@@ -1,15 +1,18 @@
 
-# OLS Regression in Statsmodels - code-along
+# Ordinary Least Squared (OLS) in Statsmodels
+
+## Introduction
+
 SO far, we created code for running linear regression experiments along with checking their goodness of fit. Python provides us with many libraries to automate this process and also to enhance the efficiency of computation. In this lesson, we shall look at the `statsmodels` library to run OLS regression experiments. 
 
-**You are required to copy and paste provided code in each cell for running this experiments** 
+**You are required to copy and paste provided code in each cell for running these experiments** 
 
-### Objectives
+## Objectives
 
 You will be able to:
-* Run an OLS regression experiment in `statsmodels` library
+* Run an OLS regression experiment in the Statsmodels library
 * Interpret basic measures to check for the goodness of fit
-* Visualize results for regression for deeper inspection. 
+* Visualize results for regression for deeper inspection
 
 ## What is `statsmodels` ?
 
@@ -22,7 +25,7 @@ For simple Linear Regression statsmodels works as follows:
 
 >Statsmodels gives us simple regression model where y is an n by 1 vector (array), and x is an n by 1 vector. The method returns a vector of size n. Here n is the number of observations. 
 
-#### Importing Necessary Libraries
+## Importing Necessary Libraries
 Following cell shows you how to import statsmodels ols method into your working python environment. We shall also import pandas for data handling and matplotlib for visualizations. 
 ```python
 import pandas as pd
@@ -32,7 +35,7 @@ import matplotlib.pyplot as plt
 plt.style.use('seaborn')
 ```
 
-#### Load the data - Initial Checks
+## Load the data - Initial Checks
 Let's load a simple dataset for purpose of understanding the process first. We have the weight-height dataset here that we've seen before. Let's try to identify the relationship between height as independent and weight and dependent variables.  We shall also use pandas visualizations to check for normality and linearity assumptions. 
 ```python
 df = pd.read_csv('heightWeight.csv')
@@ -43,7 +46,7 @@ plt.scatter(df.height, df.Weight)
 plt.title("Linearity check")
 ```
 
-#### Regression formua 
+## Regression formula 
 
 This looks all good according to what we know about normality and linearity. So we can now move and run the regression. statsmodels allows users to fit statistical models using R-style **formulas**. The formula framework is quite powerful and for simple regression it is written using a **~** as Y~X. 
 
@@ -114,7 +117,7 @@ Third Table: Residuals, Autocorrelation, and Multicollinearity
 We shall explain how to interpret some of these measures in upcoming lessons and will look at more in the following sections on stats. 
 
 
-### Visualize error terms
+## Visualize error terms
 
 We can also plot some visualizations to check for regression assumptions in error terms. We shall use `sm.graphics.plot_regress_exog()` for some built in visualization capabilities of statsmodels. here is how we do it. 
 
@@ -134,7 +137,7 @@ For the four graphs we see above:
 
 * The Component and Component Plus Residual (CCPR) plot is an extension of the partial regression plot, but shows where our trend line would lie after adding the impact of adding our other independent variables on the weight. We shall look at this in more detail in multiple regression.
 
-### QQplots
+## QQplots
 
 We can also retrieve our error terms (residuals) from the model and see a qqplot against a standrd normal distribution as shown below:
 ```python
@@ -146,6 +149,6 @@ fig.show()
 
 So there we have it, we now know how to run a ols simple regression experiment in statsmodels. In the next lesson, we shall look at how to interpret the diagnostics better and relating the outcome to the research question. 
 
-### Summary
+## Summary
 
 In this code-along, we saw how to run a simple regression experiment in statsmodels library. We looked at the format and conventions for running such an experiment. We also looked at regression diagnostics and how to interpret them , plus some visualizations to check for our regression assumptions. 

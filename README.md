@@ -129,7 +129,7 @@ plt.show()
 
 For the four graphs we see above:
 
-* The “Y and Fitted vs. X” graph plots the dependent variable against our predicted values with a confidence interval. The positive relation ship shows that height and weight are correlated correlated, i.e., when one variable increases the other increases.
+* The “Y and Fitted vs. X” graph plots the dependent variable against our predicted values with a confidence interval. The positive relationship shows that height and weight are correlated correlated, i.e., when one variable increases the other increases.
 
 * The “Residuals versus height” graph shows our model's errors versus the specified predictor variable. Each dot is an observed value; the line represents the mean of those observed values. Since there's no pattern in the distance between the dots and the mean value, the OLS assumption of homoskedasticity holds.
 

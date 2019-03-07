@@ -46,21 +46,6 @@ plt.scatter(df.height, df.weight)
 plt.title("Linearity check")
 ```
 
-
-![png](index_files/index_5_0.png)
-
-
-
-
-
-    Text(0.5,1,'Linearity check')
-
-
-
-
-![png](index_files/index_5_2.png)
-
-
 ## Regression formula 
 
 This looks pretty good according to what we know about normality and linearity! Now, let's run the regression. Statsmodels allows users to fit statistical models using R-style **formulas**. The formula framework is quite powerful and for simple regression it is written using a **~** as `Y ~ X`. 
@@ -85,67 +70,6 @@ Great, that was fast (remember we have only 20 observations). Now, you can go ah
 ```python
 model.summary()
 ```
-
-
-
-
-<table class="simpletable">
-<caption>OLS Regression Results</caption>
-<tr>
-  <th>Dep. Variable:</th>         <td>weight</td>      <th>  R-squared:         </th> <td>   0.955</td>
-</tr>
-<tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.953</td>
-</tr>
-<tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   384.8</td>
-</tr>
-<tr>
-  <th>Date:</th>             <td>Thu, 07 Mar 2019</td> <th>  Prob (F-statistic):</th> <td>1.35e-13</td>
-</tr>
-<tr>
-  <th>Time:</th>                 <td>13:02:48</td>     <th>  Log-Likelihood:    </th> <td> -64.112</td>
-</tr>
-<tr>
-  <th>No. Observations:</th>      <td>    20</td>      <th>  AIC:               </th> <td>   132.2</td>
-</tr>
-<tr>
-  <th>Df Residuals:</th>          <td>    18</td>      <th>  BIC:               </th> <td>   134.2</td>
-</tr>
-<tr>
-  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
-</tr>
-<tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>Intercept</th> <td> -204.4834</td> <td>   18.929</td> <td>  -10.802</td> <td> 0.000</td> <td> -244.252</td> <td> -164.714</td>
-</tr>
-<tr>
-  <th>height</th>    <td>    5.5390</td> <td>    0.282</td> <td>   19.616</td> <td> 0.000</td> <td>    4.946</td> <td>    6.132</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-  <th>Omnibus:</th>       <td> 2.588</td> <th>  Durbin-Watson:     </th> <td>   2.053</td>
-</tr>
-<tr>
-  <th>Prob(Omnibus):</th> <td> 0.274</td> <th>  Jarque-Bera (JB):  </th> <td>   1.245</td>
-</tr>
-<tr>
-  <th>Skew:</th>          <td> 0.202</td> <th>  Prob(JB):          </th> <td>   0.537</td>
-</tr>
-<tr>
-  <th>Kurtosis:</th>      <td> 1.846</td> <th>  Cond. No.          </th> <td>    902.</td>
-</tr>
-</table><br/><br/>Warnings:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-
-
 
 Wow , thats a lot of information. statsmodels performs a ton of tests and calculates measures to identify goodness of fit. 
 
@@ -210,10 +134,6 @@ fig = sm.graphics.plot_regress_exog(model, "height", fig=fig)
 plt.show()
 ```
 
-
-![png](index_files/index_13_0.png)
-
-
 For the four graphs we see above:
 
 * The **Y and Fitted vs. X** graph plots the dependent variable against our predicted values with a confidence interval. The positive relationship shows that height and weight are correlated correlated, i.e., when one variable increases the other increases.
@@ -235,14 +155,6 @@ residuals = model.resid
 fig = sm.graphics.qqplot(residuals, dist=stats.norm, line='45', fit=True)
 fig.show()
 ```
-
-    /Users/lore.dirick/anaconda3/lib/python3.6/site-packages/matplotlib/figure.py:418: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
-      "matplotlib is currently using a non-GUI backend, "
-
-
-
-![png](index_files/index_16_1.png)
-
 
 So you now know how to run an OLS simple regression experiment in Statsmodels. In the next lesson, you'll learn how to interpret the diagnostics better and how to relate the outcome to the research question. 
 

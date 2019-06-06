@@ -12,7 +12,7 @@ You will be able to:
 * Interpret basic measures to check for the goodness of fit
 * Visualize results for regression for deeper inspection
 
-## What is Statsmodels ?
+## What is Statsmodels?
 
 Statsmodels is a powerful Python package for many types of statistical analyses. If you installed Python via Anaconda, then the module was installed at the same time. In statistics, ordinary least square (OLS) regression is a method for estimating the unknown parameters in a linear regression model. It minimizes the sum of squared vertical distances between the observed values and the values predicted by the linear approximation. The OLS method in statsmodels is widely used for regression experiments in all fields of study.
 
@@ -38,7 +38,7 @@ Let's load a simple dataset for the purpose of understanding the process first. 
 
 
 ```python
-df = pd.read_csv('heightweight.csv')
+df = pd.read_csv('heightWeight.csv')
 plt.scatter(df.height, df.weight)
 plt.title("Linearity check")
 plt.show()
@@ -103,10 +103,10 @@ model.summary()
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   384.8</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Fri, 22 Mar 2019</td> <th>  Prob (F-statistic):</th> <td>1.35e-13</td>
+  <th>Date:</th>             <td>Thu, 06 Jun 2019</td> <th>  Prob (F-statistic):</th> <td>1.35e-13</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>12:10:18</td>     <th>  Log-Likelihood:    </th> <td> -64.112</td>
+  <th>Time:</th>                 <td>15:51:34</td>     <th>  Log-Likelihood:    </th> <td> -64.112</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>    20</td>      <th>  AIC:               </th> <td>   132.2</td>
@@ -149,7 +149,7 @@ model.summary()
 
 
 
-Wow , that's a lot of information. Statsmodels performs a ton of tests and calculates measures to identify goodness of fit. 
+Wow, that's a lot of information. Statsmodels performs a ton of tests and calculates measures to identify goodness of fit. 
 
 * You can find the R-Squared, which is 0.95 i.e. very highly related
 * You can also look at the coefficients of the model for intercept and slope (next to "height")
@@ -165,7 +165,7 @@ The left part of the first table gives some specifics on the data and the model:
 * **Model**: Technique used, an abbreviated version of Method (see methods for more).
 * **Method**: The loss function optimized in the parameter selection process. Least Squares since it picks the parameters that reduce the training error. This is also known as Mean Square Error [MSE].
 * **No. Observations**: The number of observations used by the model, or size of the training data.
-* **Degrees of Freedom Residuals**: Degrees of freedom of the residuals, which is the number of observations – number of parameters. Intercept is a parameter. The purpose of Degrees of Freedom is to reflect the impact of descriptive/summarizing statistics in the model, which in regression is the coefficient. Since the observations must "live up" to these parameters, they only have so many free observations, and the rest must be reserved to "live up" to the parameters' prophecy. Internal mechanism to ensures that there are enough observations to parameters.
+* **Degrees of Freedom Residuals**: Degrees of freedom of the residuals, which is the number of observations – number of parameters. Intercept is a parameter. The purpose of Degrees of Freedom is to reflect the impact of descriptive/summarizing statistics in the model, which in regression is the coefficient. Since the observations must "live up" to these parameters, they only have so many free observations, and the rest must be reserved to "live up" to the parameters' prophecy. This internal mechanism ensures that there are enough observations to match the parameters.
 * **Degrees of Freedom Model**: The number of parameters in the model (not including the constant/intercept term if present)
 * **Covariance Type**: Robust regression methods are designed to be not overly affected by violations of assumptions by the underlying data-generating process. Since this model is Ordinary Least Squares, it is non-robust and therefore highly sensitive to outliers.
 
@@ -218,13 +218,13 @@ plt.show()
 
 For the four graphs we see above:
 
-* The **Y and Fitted vs. X** graph plots the dependent variable against our predicted values with a confidence interval. The positive relationship shows that height and weight are correlated correlated, i.e., when one variable increases the other increases.
+* The **Y and Fitted vs. X** graph plots the dependent variable against our predicted values with a confidence interval. The positive relationship shows that height and weight are correlated, i.e., when one variable increases the other increases.
 
 * The **Residuals versus height** graph shows our model's errors versus the specified predictor variable. Each dot is an observed value; the line represents the mean of those observed values. Since there's no pattern in the distance between the dots and the mean value, the OLS assumption of homoskedasticity holds.
 
 * The **Partial regression plot** shows the relationship between height and weight, taking in to account the impact of adding other independent variables on our existing height coefficient. You'll later learn how this same graph changes when you add more variables.
 
-* The **Component and Component Plus Residual (CCPR)** plot is an extension of the partial regression plot, but shows where the trend line would lie after adding the impact of adding our other independent variables on the weight.
+* The **Component and Component Plus Residual (CCPR)** plot is an extension of the partial regression plot. It shows where the trend line would lie after adding the impact of adding our other independent variables on the weight.
 
 ## Q-Q Plots
 To check for the normality assumption, you can obtain error terms (residuals) from the model and draw Q-Q Plot against a standard normal distribution as shown below. while the residuals do not seem to match up perfectly with the red line, there seem to be no super clear deviations from the red line. So you can assume that you're OK for the normality assumption.
@@ -237,7 +237,7 @@ fig = sm.graphics.qqplot(residuals, dist=stats.norm, line='45', fit=True)
 fig.show()
 ```
 
-    /Users/lore.dirick/anaconda3/lib/python3.6/site-packages/matplotlib/figure.py:418: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+    /Users/forest.polchow/anaconda3/lib/python3.6/site-packages/matplotlib/figure.py:459: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
       "matplotlib is currently using a non-GUI backend, "
 
 

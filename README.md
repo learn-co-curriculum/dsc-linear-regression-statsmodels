@@ -8,9 +8,9 @@ So far, you learned how to create code for running linear regression experiments
 ## Objectives
 
 You will be able to:
-* Run an OLS regression experiment using Statsmodels
-* Interpret basic measures to check for the goodness of fit
-* Visualize results for regression for deeper inspection
+* Perform a linear regression using statsmodels
+* Evaluate a linear regression model by using statistical performance metrics pertaining to overall model and specific parameters
+* Determine if a particular set of data exhibits the assumptions of linear regression
 
 ## What is Statsmodels?
 
@@ -19,10 +19,10 @@ Statsmodels is a powerful Python package for many types of statistical analyses.
 ![](images/sm1.png)
 
 
-For simple linear regression, Statsmodels build a regression model where $y$ is a $(n * 1)$-vector and $x$ is a $(n * 1)$-vector. The method returns a vector of size $n$, with $n$ the number of observations. 
+For simple linear regression, Statsmodels builds a regression model where $y$ is a $(n * 1)$-vector and $x$ is a $(n * 1)$-vector. The method returns a vector of size $n$, where $n$ is the number of observations. 
 
 ## Importing Necessary Libraries
-The next code cell shows you how to import statsmodels ols method into your working python environment. You'll also import pandas for data handling and matplotlib for visualizations. 
+The next code cell shows you how to import statsmodels OLS method into your working Python environment. You'll also import Pandas for data handling and Matplotlib for visualizations. 
 
 
 ```python
@@ -34,7 +34,7 @@ plt.style.use('seaborn')
 ```
 
 ## Load the data - Initial Checks
-Let's load a simple dataset for the purpose of understanding the process first. You can use the weight-height dataset used before. Let's try to identify the relationship between height as independent and weight and dependent variables. You will also use pandas visualizations to check for your linearity assumption. 
+Let's load a simple dataset for the purpose of understanding the process first. You can use the weight-height dataset used before. Let's try to identify the relationship between height as independent and weight and dependent variables. You will also use Pandas visualizations to check for your linearity assumption. 
 
 
 ```python
@@ -50,7 +50,7 @@ plt.show()
 
 Next, let's look at the distributions of the dependent and independent variables. 
 
-**NOTE**: observing normality here does _NOT_ necessarily mean your normality assumption is fulfilled! You just generally want to check out the distribution of your variables before starting to build a model. You'll verify the normality assumption later by checking the distribution of the residuals **after** building the model.
+**NOTE**: Observing normality here does _NOT_ necessarily mean your normality assumption is fulfilled! You just generally want to check out the distribution of your variables before starting to build a model. You'll verify the normality assumption later by checking the distribution of the residuals **after** building the model.
 
 
 ```python
@@ -67,7 +67,7 @@ plt.show()
 
 Looks like you're good for the linearity assumption, and additionally, the distributions for height and weight look reasonable (and even pretty normal!). Now, let's run the regression. Statsmodels allows users to fit statistical models using R-style **formulas**. The formula framework is quite powerful and for simple regression it is written using a **~** as `Y ~ X`. 
 
-The formula gives instruction for a general structure for a regression call. For a statsmodels ols calls, you'll need a pandas dataframe with column names that you will add to your formula. 
+The formula gives instruction for a general structure for a regression call. For a statsmodels ols calls, you'll need a Pandas dataframe with column names that you will add to your formula. 
 
 
 ```python
@@ -151,7 +151,7 @@ model.summary()
 
 Wow, that's a lot of information. Statsmodels performs a ton of tests and calculates measures to identify goodness of fit. 
 
-* You can find the R-Squared, which is 0.95 i.e. very highly related
+* You can find the R-Squared, which is 0.95 i.e. the data are very linearly related
 * You can also look at the coefficients of the model for intercept and slope (next to "height")
 * Kurtosis and Skew values are shown here
 * A lot of significance testing is being done here
@@ -169,7 +169,7 @@ The left part of the first table gives some specifics on the data and the model:
 * **Degrees of Freedom Model**: The number of parameters in the model (not including the constant/intercept term if present)
 * **Covariance Type**: Robust regression methods are designed to be not overly affected by violations of assumptions by the underlying data-generating process. Since this model is Ordinary Least Squares, it is non-robust and therefore highly sensitive to outliers.
 
-The right part of the first table shows the goodness of fit 
+The right part of the first table shows the goodness of fit: 
 
 * **R-squared**: The coefficient of determination, the Sum Squares of Regression divided by Total Sum Squares. This translates to the percent of variance explained by the model. The remaining percentage represents the variance explained by error, the E term, the part that model and predictors fail to grasp.
 * **Adj. R-squared**: Version of the R-Squared that penalizes additional independent variables. 
@@ -179,7 +179,7 @@ The right part of the first table shows the goodness of fit
 * **AIC**: The Akaike Information Criterion. Adjusts the log-likelihood based on the number of observations and the complexity of the model. Penalizes the model selection metrics when more independent variables are added.
 * **BIC**: The Bayesian Information Criterion. Similar to the AIC, but has a higher penalty for models with more parameters. Penalizes the model selection metrics when more independent variables are added.
 
-Second Table: Coefficient Reports 
+The second table shows the coefficient report: 
 
 * **coef**: The estimated value of the coefficient. By how much the model multiplies the independent value by.
 * **std err**: The basic standard error of the estimate of the coefficient. Average distance deviation of the points from the model, which offers a unit relevant way to gauge model accuracy.
@@ -187,23 +187,23 @@ Second Table: Coefficient Reports
 * **P > |t|**: P-value that the null-hypothesis that the coefficient = 0 is true. If it is less than the confidence level, often 0.05, it indicates that there is a statistically significant relationship between the term and the response.
 * **[95.0% Conf. Interval]**: The lower and upper values of the 95% confidence interval. Specific range of the possible coefficient values.
 
-Third Table: Residuals, Autocorrelation, and Multicollinearity 
+The third table shows information about the residuals, autocorrelation, and multicollinearity: 
 
 * **Skewness**: A measure of the symmetry of the data about the mean. Normally-distributed errors should be symmetrically distributed about the mean (equal amounts above and below the line). The normal distribution has 0 skew.
 * **Kurtosis**: A measure of the shape of the distribution. Compares the amount of data close to the mean with those far away from the mean (in the tails), so model "peakiness". The normal distribution has a Kurtosis of 3, and the greater the number, the more the curve peaks.
-* **Omnibus D’Angostino’s test**: It provides a combined statistical test for the presence of skewness and kurtosis.
+* **Omnibus D’Angostino’s test**: Provides a combined statistical test for the presence of skewness and kurtosis.
 * **Prob(Omnibus)**: The above statistic turned into a probability
 * **Jarque-Bera**: A different test of the skewness and kurtosis
 * **Prob (JB)**: The above statistic turned into a probability
 * **Durbin-Watson**: A test for the presence of autocorrelation (that the errors are not independent), which is often important in time-series analysis
 * **Cond. No**: A test for multicollinearity (if in a fit with multiple parameters, the parameters are related to each other).
 
-The interpretation of some of these measures will be explained in the next lessons. For others, you'll get a better insight into them in sections on statistics. 
+The interpretation of some of these measures will be explained in the next lessons. For others, you'll get a better insight into them in the lessons on statistics. 
 
 
 ## Visualize error terms
 
-You can also plot some visualizations to check for regression assumptions in error terms. You'll use `sm.graphics.plot_regress_exog()` for some built-in visualization capabilities of statsmodels. here is how to do it. 
+You can also plot some visualizations to check the regression assumptions with respect to the error terms. You'll use `sm.graphics.plot_regress_exog()` for some built-in visualization capabilities of statsmodels. Here is how to do it: 
 
 
 ```python
@@ -227,7 +227,7 @@ For the four graphs we see above:
 * The **Component and Component Plus Residual (CCPR)** plot is an extension of the partial regression plot. It shows where the trend line would lie after adding the impact of adding our other independent variables on the weight.
 
 ## Q-Q Plots
-To check for the normality assumption, you can obtain error terms (residuals) from the model and draw Q-Q Plot against a standard normal distribution as shown below. while the residuals do not seem to match up perfectly with the red line, there seem to be no super clear deviations from the red line. So you can assume that you're OK for the normality assumption.
+To check for the normality assumption, you can obtain error terms (residuals) from the model and draw Q-Q Plot against a standard normal distribution as shown below. While the residuals do not seem to match up perfectly with the red line, there seem to be no super clear deviations from the red line. So you can assume that you're OK for the normality assumption.
 
 
 ```python

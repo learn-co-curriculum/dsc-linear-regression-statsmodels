@@ -10,6 +10,7 @@ Going forward, you're going to use a Python library called StatsModels to do the
 ## Objectives
 
 You will be able to:
+
 * Perform a linear regression using StatsModels
 * Evaluate a linear regression model using StatsModels 
 * Interpret linear regression model coefficients using StatsModels

@@ -44,7 +44,7 @@ Going forward, `sm` refers to StatsModels.
 
 ```python
 import matplotlib.pyplot as plt
-plt.style.use('seaborn')
+plt.style.use('seaborn-v0_8-whitegrid')
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
